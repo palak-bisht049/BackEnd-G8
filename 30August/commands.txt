@@ -1,0 +1,139 @@
+ mongosh
+Current Mongosh Log ID: 66d17d36b31ec0505a2710bb
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.3.0
+Using MongoDB:          7.0.14
+Using Mongosh:          2.3.0
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2024-08-30T09:28:48.525+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> use chitkara
+switched to db chitkara
+chitkara> db.student.find({
+...     $or: [
+...         { marks: { $gte: 90 } },
+...         { age: { $lt: 18 } }
+...     ]
+... })
+[
+  {
+    _id: ObjectId('66ceefef6439b6df322710c1'),
+    name: 'Frank',
+    age: 21,
+    subject: 'Data Science',
+    marks: 90,
+    address: 'Chitkara University'
+  },
+  {
+    _id: ObjectId('66ceefef6439b6df322710c4'),
+    name: 'Ivy',
+    age: 22,
+    subject: 'Data Science',
+    marks: 91,
+    address: 'Chitkara University',
+    grade: 'A++'
+  }
+]
+chitkara> db.student.find({
+...     grade: { $not: { $eq: "A++" } }
+... })
+[
+  {
+    _id: ObjectId('66ceefef6439b6df322710c1'),
+    name: 'Frank',
+    age: 21,
+    subject: 'Data Science',
+    marks: 90,
+    address: 'Chitkara University'
+  },
+  {
+    _id: ObjectId('66ceefef6439b6df322710c2'),
+    name: 'Grace',
+    age: 23,
+    subject: 'Data Science',
+    marks: 89,
+    address: 'Chitkara University'
+  },
+  {
+    _id: ObjectId('66ceefef6439b6df322710c3'),
+    name: 'Hannah',
+    age: 20,
+    subject: 'Data Science',
+    marks: 85,
+    address: 'Chitkara University'
+  },
+  {
+    _id: ObjectId('66ceefef6439b6df322710c5'),
+    name: 'Jack',
+    age: 24,
+    subject: 'Data Science',
+    marks: 87,
+    address: 'Chitkara University'
+  }
+]
+chitkara> db.student.find({
+...     $and: [
+...         { age: { $gt: 20 } },
+...         { marks: { $gte: 90 } }
+...     ]
+... })
+[
+  {
+    _id: ObjectId('66ceefef6439b6df322710c1'),
+    name: 'Frank',
+    age: 21,
+    subject: 'Data Science',
+    marks: 90,
+    address: 'Chitkara University'
+  },
+  {
+    _id: ObjectId('66ceefef6439b6df322710c4'),
+    name: 'Ivy',
+    age: 22,
+    subject: 'Data Science',
+    marks: 91,
+    address: 'Chitkara University',
+    grade: 'A++'
+  }
+]
+chitkara> db.student.find({
+...     $nor: [
+...         { marks: { $gt: 85 } },
+...         { age: { $gt: 21 } }
+...     ]
+... })
+[
+  {
+    _id: ObjectId('66ceefef6439b6df322710c3'),
+    name: 'Hannah',
+    age: 20,
+    subject: 'Data Science',
+    marks: 85,
+    address: 'Chitkara University'
+  }
+]
+chitkara> db.student.find({
+...     $nor: [
+...         { marks: { $gt: 85 } },
+...         { age: { $gt: 21 } }
+...     ]
+... })
+[
+  {
+    _id: ObjectId('66ceefef6439b6df322710c3'),
+    name: 'Hannah',
+    age: 20,
+    subject: 'Data Science',
+    marks: 85,
+    address: 'Chitkara University'
+  }
+]
+chitkara>
+
+
+
+
