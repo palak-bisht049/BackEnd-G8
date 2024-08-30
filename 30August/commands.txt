@@ -271,6 +271,69 @@ chitkara> db.student.replaceOne(
   upsertedCount: 0
 }
 
+ db.recipes.insertMany([
+...   {
+...     "name": "Spaghetti Carbonara",
+...     "cuisine": "Italian",
+...     "type": "non-veg",
+...     "ingredients": ["spaghetti", "eggs", "parmesan cheese", "bacon"],
+...     "prepTime": 20
+...   },
+...   {
+...     "name": "Vegetable Curry",
+...     "cuisine": "Indian",
+...     "type": "veg",
+...     "ingredients": ["potatoes", "carrots", "peas", "curry powder"],
+...     "prepTime": 30
+...   },
+...   {
+...     "name": "Chicken Caesar Salad",
+...     "cuisine": "American",
+...     "type": "non-veg",
+...     "ingredients": ["chicken breast", "romaine lettuce", "croutons", "Caesar dressing"],
+...     "prepTime": 15
+...   },
+...   {
+...     "name": "Sushi Rolls",
+...     "cuisine": "Japanese",
+...     "type": "non-veg",
+...     "ingredients": ["sushi rice", "seaweed", "fish", "vegetables"],
+...     "prepTime": 45
+...   },
+...   {
+...     "name": "Quinoa Salad",
+...     "cuisine": "Mediterranean",
+...     "type": "veg",
+...     "ingredients": ["quinoa", "cucumber", "tomatoes", "feta cheese"],
+...     "prepTime": 25
+...   }
+... ]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('66d1936eb31ec0505a2710bc'),
+    '1': ObjectId('66d1936eb31ec0505a2710bd'),
+    '2': ObjectId('66d1936eb31ec0505a2710be'),
+    '3': ObjectId('66d1936eb31ec0505a2710bf'),
+    '4': ObjectId('66d1936eb31ec0505a2710c0')
+  }
+}
+chitkara> db.recipes.deleteOne({ name: "Chicken Caesar Salad" });
+{ acknowledged: true, deletedCount: 1 }
+chitkara> db.recipes.deleteMany({ type: "non-veg" });
+{ acknowledged: true, deletedCount: 2 }
+chitkara> db.recipes.findOneAndDelete(
+...   { name: "Vegetable Curry" }
+... );
+{
+  _id: ObjectId('66d1936eb31ec0505a2710bd'),
+  name: 'Vegetable Curry',
+  cuisine: 'Indian',
+  type: 'veg',
+  ingredients: [ 'potatoes', 'carrots', 'peas', 'curry powder' ],
+  prepTime: 30
+}
+
 
 
 
